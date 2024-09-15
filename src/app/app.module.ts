@@ -11,6 +11,7 @@ import { SeparadorComponent } from './componentes/separador/separador.component'
 import { ContatoComponent } from './componentes/contato/contato.component';
 import { FormContatoComponent } from './main/form-contato/form-contato.component';
 import { RouterLink } from '@angular/router';
+import { CampoErroComponent } from './componentes/campo-erro/campo-erro.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RouterLink } from '@angular/router';
     CabecalhoComponent,
     SeparadorComponent,
     ContatoComponent,
-    FormContatoComponent
+    FormContatoComponent,
+    CampoErroComponent
   ],
   imports: [
     BrowserModule,
