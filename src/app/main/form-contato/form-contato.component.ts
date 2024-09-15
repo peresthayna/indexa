@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-contato',
@@ -7,7 +8,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './form-contato.component.css'
 })
 export class FormContatoComponent implements OnInit {
-  public contatoForm!: FormGroup;
+  public contatoForm: FormGroup;
+
+  constructor(
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.contatoForm = new FormGroup({
@@ -20,21 +25,21 @@ export class FormContatoComponent implements OnInit {
     })
   }
 
-  //salvar contato (ngSubmit)="salvarContato()"
+  public salvarContato(): void {
+
+  }
 
   public cleanFormGroup(): void {
     this.contatoForm.reset();
   }
 
-  public validarCampo(campo) {
-    return !campo.valid && campo.touched;
+  public validarCampo(campo: string): boolean {
+    const control = this.contatoForm!.get(campo);
+    return !control!.valid && (control!.dirty || control!.touched);
   }
 
-  aplicarCss(campo) {
-    return {
-      'has-error': this.validarCampo(campo),
-      'has-feedback': this.validarCampo(campo)
-    }
+  public redirectTo(path: string): void {
+    this.router.navigate([path]);
   }
 
 }

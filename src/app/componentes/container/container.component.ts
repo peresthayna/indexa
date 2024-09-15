@@ -29,6 +29,5 @@ export class ContainerComponent implements OnInit {
       }
     }
 
-    //filtrar contatos por letra inicial
     //filtrar contatos por busca (remover acentos primeiro e colocar em minúsculas)
 }

@@ -126,7 +126,7 @@ input:focus {
   justify-content: space-between;
 }
 
-.botao-cancelar, .botao-salvar, .botao-desabilitado {
+.botao-cancelar, .botao-salvar, .botao-desativado {
   width: 196px;
   height: 41px;
   padding: 6px, 12px;
@@ -144,7 +144,6 @@ input:focus {
   background-color: #FFFFFF;
   border: 1px solid #0D6EFD;
   cursor: pointer;
-
 }
 
 .botao-salvar {
@@ -153,15 +152,10 @@ input:focus {
   cursor: pointer;
 }
 
-.botao-desabilitado {
+.botao-desativado {
+  color:#FFFFFF;
   background-color: #ADB5BD;
   cursor:not-allowed;
-}
-
-.mensagem-erro {
-  font-size: 16px;
-  color: red;
-  margin-bottom: 12px;
 }
 
 header .cabecalho-link button {
@@ -173,4 +167,25 @@ header .cabecalho-link button {
 
 .ng-invalid.ng-touched:not(form) {
   border: 1px solid red;
+}
+
+.voltar span {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  text-align: left;
+  color: #0D6EFD;
+  padding-left: 5px;
+}
+
+.voltar img {
+  width: 16px;
+  height: 16px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.voltar:hover {
+  cursor: pointer;
 }
