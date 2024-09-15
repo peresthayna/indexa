@@ -17,16 +17,15 @@ export class ContainerComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.contato.id = 1;
         this.contato.nome = 'Thayná';
         this.contato.telefone = '+55 18 998765432';
+        this.contato.email = 'thayna@gmail.com';
+        this.contato.avatar = 'assets/user.png';
     }
 
-    public redirectTo(path: string, contato?: Contato) {
-      if(contato == null) {
-        this.router.navigate([path]);
-      } else {
-        this.router.navigate([path+'/'+contato.id]);
-      }
+    public redirectTo(path: string) {
+      this.router.navigate([path]);
     }
 
     //filtrar contatos por busca (remover acentos primeiro e colocar em minúsculas)

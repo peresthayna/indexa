@@ -2,7 +2,7 @@
   <app-cabecalho></app-cabecalho>
   <input type="search" placeholder="Digite para buscar" [(ngModel)]="busca">
   <div class="container-fluid">
-    <button class="adicionar-contato" (click)="redirectTo('/adicionar-contato')">
+    <button class="adicionar-contato" (click)="redirectTo('/adicionar-contato/0')">
       <img src="assets/plus.png">
       <span>Criar novo contato</span>
     </button>
@@ -11,8 +11,9 @@
     <app-separador>
       {{ letra }}
       @if (contato.nome.startsWith(letra)) {
-        <app-contato [contato]="contato" (click)="redirectTo('/perfil-contato')"></app-contato>
+        <app-contato [contato]="contato"></app-contato>
       }
     </app-separador>
   }
 </div>
+<app-footer></app-footer>
