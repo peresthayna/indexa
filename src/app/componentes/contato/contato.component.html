@@ -1,6 +1,6 @@
 <section class="contato">
   <ul>
-    <li (click)="redirectTo('/perfil-contato/1')" class="redirect">
+    <li (click)="redirectTo('/perfil-contato/'+contato.id)" class="redirect">
       <img [src]="contato.avatar">
       <strong>{{ contato.nome }}</strong>
     </li>
@@ -12,7 +12,7 @@
         <img src="/assets/pencil-square.png" (click)="redirectTo('/adicionar-contato/'+contato.id)">
       </button>
       <button>
-        <img src="/assets/trash.png" (click)="deletarContato(contato.id)">
+        <img src="/assets/trash.png" (click)="deletarContato(contato)">
       </button>
     </li>
   </ul>
