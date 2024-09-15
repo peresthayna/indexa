@@ -17,7 +17,7 @@ export class PerfilContatoComponent {
     aniversario: '27/10/2000',
     redes: '',
     observacoes: '',
-    avatar: '',
+    avatar: 'assets/user.png',
   }
 
   constructor(

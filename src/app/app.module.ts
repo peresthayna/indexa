@@ -13,6 +13,7 @@ import { FormContatoComponent } from './main/form-contato/form-contato.component
 import { RouterLink } from '@angular/router';
 import { CampoErroComponent } from './componentes/campo-erro/campo-erro.component';
 import { PerfilContatoComponent } from './main/perfil-contato/perfil-contato.component';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PerfilContatoComponent } from './main/perfil-contato/perfil-contato.com
     ContatoComponent,
     FormContatoComponent,
     CampoErroComponent,
-    PerfilContatoComponent
+    PerfilContatoComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

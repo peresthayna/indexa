@@ -6,8 +6,8 @@ import { PerfilContatoComponent } from './main/perfil-contato/perfil-contato.com
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'adicionar-contato', component: FormContatoComponent },
-  { path: 'perfil-contato', component: PerfilContatoComponent },
+  { path: 'adicionar-contato/:id', component: FormContatoComponent },
+  { path: 'perfil-contato/:id', component: PerfilContatoComponent },
 ];
 
 @NgModule({

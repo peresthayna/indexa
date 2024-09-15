@@ -62,7 +62,8 @@
     </ul>
     <div class="botoes">
       <button (click)="excluirContato()" class="botao-excluir">Excluir contato</button>
-      <button class="botao-editar">Editar</button>
+      <button class="botao-editar" (click)="redirectTo('adicionar-contato/'+contato.id)">Editar</button>
     </div>
   </section>
 </div>
+<app-footer></app-footer>
