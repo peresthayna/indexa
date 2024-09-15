@@ -1,32 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Contato } from '../../main/shared/model/contato.model';
 import { Router } from '@angular/router';
+import { ContatoService } from '../../main/shared/service/contato.service';
+import { debounceTime, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrl: './container.component.css'
+  styleUrl: './container.component.css',
 })
 export class ContainerComponent implements OnInit {
-	public alfabeto: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-  	public contato: Contato = new Contato();
-  	public busca: string = '';
 
-    constructor(
-      private router: Router
-    ) {}
+  public alfabeto: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  public busca: string = '';
+  public contatos: { [key: string]: Contato[] } = {};
+  public searchSubject = new Subject<string>();
 
-    ngOnInit(): void {
-        this.contato.id = 1;
-        this.contato.nome = 'Thayná';
-        this.contato.telefone = '+55 18 998765432';
-        this.contato.email = 'thayna@gmail.com';
-        this.contato.avatar = 'assets/user.png';
+  constructor(
+    private router: Router,
+    private contatoService: ContatoService
+  ) {}
+
+  ngOnInit(): void {
+    this.getContatos();
+    this.setupSearch();
+  }
+
+  public setupSearch(): void {
+    this.searchSubject.pipe(
+      debounceTime(500),
+      switchMap(busca => this.contatoService.getContatosBySearch(busca))
+    ).subscribe(contatos => {
+      this.contatos = {};
+      contatos.forEach(contato => {
+        const letra = contato.nome.charAt(0).toUpperCase();
+        if (!this.contatos[letra]) {
+          this.contatos[letra] = [];
+        }
+        this.contatos[letra].push(contato);
+      });
+    });
+  }
+
+  public onSearchChange(): void {
+    if(this.busca == '') {
+      this.getContatos();
+    } else {
+      this.searchSubject.next(this.busca);
     }
+  }
 
-    public redirectTo(path: string) {
-      this.router.navigate([path]);
-    }
+  public getContatos(): void {
+    this.alfabeto.forEach((letra) => {
+      this.contatoService.getContatosByLetter(letra).subscribe(contatos =>
+        this.contatos[letra] = contatos
+      );
+    });
+  }
 
-    //filtrar contatos por busca (remover acentos primeiro e colocar em minúsculas)
+  public redirectTo(path: string) {
+    this.router.navigate([path]);
+  }
+
 }

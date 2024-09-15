@@ -1,19 +1,19 @@
 <div class="container">
   <app-cabecalho></app-cabecalho>
-  <input type="search" placeholder="Digite para buscar" [(ngModel)]="busca">
+  <input type="search" placeholder="Digite para buscar" [(ngModel)]="busca" (ngModelChange)="onSearchChange()">
   <div class="container-fluid">
     <button class="adicionar-contato" (click)="redirectTo('/adicionar-contato/0')">
       <img src="assets/plus.png">
       <span>Criar novo contato</span>
     </button>
   </div>
-  @for (letra of alfabeto; track letra) {
+  <div *ngFor="let lista of contatos | keyvalue">
     <app-separador>
-      {{ letra }}
-      @if (contato.nome.startsWith(letra)) {
+      {{ lista['key'] }}
+      <div *ngFor="let contato of lista['value']">
         <app-contato [contato]="contato"></app-contato>
-      }
+      </div>
     </app-separador>
-  }
+  </div>
 </div>
 <app-footer></app-footer>

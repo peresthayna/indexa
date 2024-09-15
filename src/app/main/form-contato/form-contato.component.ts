@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contato } from '../shared/model/contato.model';
+import { ContatoService } from '../shared/service/contato.service';
+import { ContatoConsultaDTO } from '../shared/model/contato.consulta.model';
+import { ContatoCadastroDTO } from '../shared/model/contato.cadastro.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-contato',
@@ -12,12 +16,12 @@ export class FormContatoComponent implements OnInit {
   public contatoForm: FormGroup;
   public idParam: number = 0;
   public isUpdate: boolean = false;
-  public contato: Contato = new Contato();
   public imagemSelecionada: string = 'assets/user.png';
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private contatoService: ContatoService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +29,7 @@ export class FormContatoComponent implements OnInit {
       if(params['id'] != 0) {
         this.idParam = params['id'];
         this.isUpdate = true;
-        //get contato by id
+        console.log(this.idParam)
       }
     })
     this.iniciarFormulario();
@@ -56,7 +60,34 @@ export class FormContatoComponent implements OnInit {
   }
 
   public salvarContato(): void {
-    //salvar se novo, se não atualiza
+    if(this.isUpdate) {
+      let contatoConsulta: ContatoConsultaDTO = new ContatoConsultaDTO();
+      contatoConsulta.id = this.idParam;
+      contatoConsulta.nome = this.contatoForm!.get('nome')?.value;
+      contatoConsulta.telefone = this.contatoForm!.get('telefone')?.value;
+      contatoConsulta.email = this.contatoForm!.get('email')?.value;
+      contatoConsulta.avatar = this.imagemSelecionada;
+      contatoConsulta.aniversario = this.contatoForm!.get('aniversario')?.value;
+      contatoConsulta.redes = this.contatoForm!.get('redes')?.value;
+      contatoConsulta.observacoes = this.contatoForm!.get('observacoes')?.value;
+      this.contatoService.atualizarContato(this.idParam, contatoConsulta).subscribe((contato) => {
+        this.redirectTo('perfil-contato/'+contato.id);
+      },
+      (httpError: HttpErrorResponse) => alert(httpError.error.message));
+    } else {
+      let contatoCadastro: ContatoCadastroDTO = new ContatoCadastroDTO();
+      contatoCadastro.nome = this.contatoForm!.get('nome')?.value;
+      contatoCadastro.telefone = this.contatoForm!.get('telefone')?.value;
+      contatoCadastro.email = this.contatoForm!.get('email')?.value;
+      contatoCadastro.avatar = this.imagemSelecionada;
+      contatoCadastro.aniversario = this.contatoForm!.get('aniversario')?.value;
+      contatoCadastro.redes = this.contatoForm!.get('redes')?.value;
+      contatoCadastro.observacoes = this.contatoForm!.get('observacoes')?.value;
+      this.contatoService.cadastrarContato(contatoCadastro).subscribe((contato) => {
+        this.redirectTo('perfil-contato/'+contato.id);
+      },
+      (httpError: HttpErrorResponse) => alert(httpError.error.message));
+    }
   }
 
   public cleanFormGroup(): void {
