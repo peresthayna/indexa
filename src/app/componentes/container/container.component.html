@@ -11,7 +11,7 @@
     <app-separador>
       {{ letra }}
       @if (contato.nome.startsWith(letra)) {
-        <app-contato [contato]="contato"></app-contato>
+        <app-contato [contato]="contato" (click)="redirectTo('/perfil-contato')"></app-contato>
       }
     </app-separador>
   }

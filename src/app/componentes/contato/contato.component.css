@@ -1,3 +1,7 @@
+.contato:hover {
+  cursor: pointer;
+}
+
 .contato ul {
   display: flex;
   padding: 0;
