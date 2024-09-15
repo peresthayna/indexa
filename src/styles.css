@@ -19,3 +19,24 @@ body {
   margin-top: 80px;
   box-sizing: border-box;
 }
+
+.voltar span {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  text-align: left;
+  color: #0D6EFD;
+  padding-left: 5px;
+}
+
+.voltar img {
+  width: 16px;
+  height: 16px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.voltar:hover {
+  cursor: pointer;
+}
