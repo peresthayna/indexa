@@ -1,6 +1,12 @@
 <div class="container">
   <app-cabecalho></app-cabecalho>
   <input type="search" placeholder="Digite para buscar" [(ngModel)]="busca">
+  <div class="container-fluid">
+    <button class="adicionar-contato" (click)="redirectTo('/adicionar-contato')">
+      <img src="assets/plus.png">
+      <span>Criar novo contato</span>
+    </button>
+  </div>
   @for (letra of alfabeto; track letra) {
     <app-separador>
       {{ letra }}

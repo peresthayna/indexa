@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contato } from '../../main/shared/model/contato.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-container',
@@ -11,9 +12,21 @@ export class ContainerComponent implements OnInit {
   	public contato: Contato = new Contato();
   	public busca: string = '';
 
+    constructor(
+      private router: Router
+    ) {}
+
     ngOnInit(): void {
         this.contato.nome = 'Thayná';
         this.contato.telefone = '+55 18 998765432';
+    }
+
+    public redirectTo(path: string, contato?: Contato) {
+      if(contato == null) {
+        this.router.navigate([path]);
+      } else {
+        this.router.navigate([path+'/'+contato.id]);
+      }
     }
 
     //filtrar contatos por letra inicial

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,7 @@ import { CabecalhoComponent } from './componentes/cabecalho/cabecalho.component'
 import { SeparadorComponent } from './componentes/separador/separador.component';
 import { ContatoComponent } from './componentes/contato/contato.component';
 import { FormContatoComponent } from './main/form-contato/form-contato.component';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { FormContatoComponent } from './main/form-contato/form-contato.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    RouterLink,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration()
