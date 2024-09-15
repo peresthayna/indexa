@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 import { CampoErroComponent } from './componentes/campo-erro/campo-erro.component';
 import { PerfilContatoComponent } from './main/perfil-contato/perfil-contato.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FooterComponent } from './componentes/footer/footer.component';
     AppRoutingModule,
     FormsModule,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
