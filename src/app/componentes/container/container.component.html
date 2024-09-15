@@ -1,8 +1,12 @@
 <div class="container">
   <app-cabecalho></app-cabecalho>
+  <input type="search" placeholder="Digite para buscar" [(ngModel)]="busca">
   @for (letra of alfabeto; track letra) {
     <app-separador>
       {{ letra }}
+      @if (contato.nome.startsWith(letra)) {
+        <app-contato [contato]="contato"></app-contato>
+      }
     </app-separador>
   }
 </div>
