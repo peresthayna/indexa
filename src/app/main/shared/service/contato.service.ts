@@ -38,7 +38,7 @@ export class ContatoService {
   }
 
   public deletarContato(id: number): Observable<void> {
-    return this.http.delete<void>(this.URL+'/'+id);
+    return this.http.delete<void>(this.URL+'/deletar/'+id);
   }
 
 }

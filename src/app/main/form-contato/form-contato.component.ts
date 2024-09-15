@@ -29,7 +29,15 @@ export class FormContatoComponent implements OnInit {
       if(params['id'] != 0) {
         this.idParam = params['id'];
         this.isUpdate = true;
-        console.log(this.idParam)
+        this.contatoService.getContatoById(this.idParam).subscribe(contato => {
+          this.contatoForm!.get('nome')?.setValue(contato.nome);
+          this.contatoForm!.get('telefone')?.setValue(contato.telefone);
+          this.contatoForm!.get('email')?.setValue(contato.email);
+          this.contatoForm!.get('aniversario')?.setValue(contato.aniversario);
+          this.contatoForm!.get('redes')?.setValue(contato.redes);
+          this.contatoForm!.get('observacoes')?.setValue(contato.observacoes);
+          this.imagemSelecionada = contato.avatar;
+        })
       }
     })
     this.iniciarFormulario();
