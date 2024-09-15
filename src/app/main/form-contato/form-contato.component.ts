@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Contato } from '../shared/model/contato.model';
 
 @Component({
   selector: 'app-form-contato',
@@ -9,12 +10,28 @@ import { Router } from '@angular/router';
 })
 export class FormContatoComponent implements OnInit {
   public contatoForm: FormGroup;
+  public idParam: number = 0;
+  public isUpdate: boolean = false;
+  public contato: Contato = new Contato();
+  public imagemSelecionada: string = 'assets/user.png';
 
   constructor(
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      if(params['id'] != 0) {
+        this.idParam = params['id'];
+        this.isUpdate = true;
+        //get contato by id
+      }
+    })
+    this.iniciarFormulario();
+  }
+
+  public iniciarFormulario(): void {
     this.contatoForm = new FormGroup({
       nome: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
       telefone: new FormControl('', Validators.required),
@@ -25,12 +42,30 @@ export class FormContatoComponent implements OnInit {
     })
   }
 
-  public salvarContato(): void {
+  public onFileSelect(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = this.handleReaderLoaded.bind(this);
+      reader.readAsDataURL(file);
+    }
+  }
 
+  handleReaderLoaded(e: any) {
+    this.imagemSelecionada = e.target.result;
+  }
+
+  public salvarContato(): void {
+    //salvar se novo, se não atualiza
   }
 
   public cleanFormGroup(): void {
-    this.contatoForm.reset();
+    if(this.isUpdate) {
+      this.redirectTo('');
+    } else {
+      this.contatoForm.reset();
+      this.imagemSelecionada = 'assets/user.png';
+    }
   }
 
   public validarCampo(campo: string): boolean {

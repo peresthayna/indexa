@@ -13,6 +13,16 @@
     </section>
   </header>
   <form [formGroup]="contatoForm" (ngSubmit)="salvarContato()">
+    <div class="file">
+      <label for="file-upload" class="custom-file-upload" *ngIf="imagemSelecionada == 'assets/user.png'">
+        <i class="material-icons">add</i>
+        <span>Adicione a imagem do contato</span>
+      </label>
+      <div class="foto" *ngIf="imagemSelecionada != 'assets/user.png'">
+        <img [src]="imagemSelecionada">
+      </div>
+    </div>
+    <input id="file-upload" type="file" style="display: none;" (change)="onFileSelect($event)" accept="image/*"><br>
     <label for="nome">Nome</label>
     <input type="text" #nome id="nome" placeholder="Digite o nome do contato" formControlName="nome">
     <app-campo-erro [mostrarErro]="validarCampo('nome')" mensagemErro="Nome é obrigatório."></app-campo-erro>
@@ -22,7 +32,7 @@
     <label for="email">E-mail</label>
     <input type="email" #email id="email" placeholder="Insira o endereço de e-mail do contato" formControlName="email">
     <app-campo-erro [mostrarErro]="validarCampo('email')" mensagemErro="E-mail inválido."></app-campo-erro>
-    <app-separador></app-separador>'
+    <app-separador></app-separador>
     <label for="aniversario">Aniversário</label>
     <input type="date" #aniversario id="aniversario" placeholder="Data de nascimento" formControlName="aniversario">
     <label for="redes">Redes sociais</label>
@@ -33,7 +43,7 @@
     <label for="observacoes">Observações</label>
     <textarea type="text"
       id="observacoes" #observacoes
-      placeholder="Coloque observações nesse espaço.  Exemplo: Instrutora da academia, Amiga da Júlia"
+      placeholder="Coloque observações nesse espaço.  Exemplo: 'Instrutora'"
       formControlName="observacoes">
     </textarea>
     <section class="botoes">
@@ -42,3 +52,4 @@
     </section>
   </form>
 </div>
+<app-footer></app-footer>
