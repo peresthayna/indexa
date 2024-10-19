@@ -7,6 +7,18 @@ body {
   min-height: 100vh;
 }
 
+@media screen and (min-width: 48rem) {
+  .container {
+    padding: 56px 134px;
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  .container {
+    padding: 56px 28px;
+  }
+}
+
 .container {
   border-radius: 16px;
   border: 1px solid #0D6EFD;
@@ -15,7 +27,6 @@ body {
   width: 684px;
   max-width: 90vw;
   margin: 0 auto;
-  padding: 56px 134px;
   margin-top: 80px;
   box-sizing: border-box;
 }

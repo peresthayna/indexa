@@ -9,7 +9,7 @@ import { ContatoCadastroDTO } from '../model/contato.cadastro.model';
 })
 export class ContatoService {
 
-  private readonly URL: string = 'http://127.0.0.1:8080/contato';
+  private readonly URL: string = 'http://172.100.127.173:8080/contato';
 
   constructor(private http: HttpClient) { }
 
